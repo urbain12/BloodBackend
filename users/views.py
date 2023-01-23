@@ -88,6 +88,9 @@ class register(CreateAPIView):
                 user = User.objects.create_user(
                     FirstName=request.data["FirstName"],
                     LastName=request.data["LastName"],
+                    Place=request.data["Place"],
+                    Btype=request.data["Btype"],
+                    typee=request.data["typee"],
                     DOB=request.data["DOB"],
                     email=request.data["email"],
                     phone=request.data["phone"],
