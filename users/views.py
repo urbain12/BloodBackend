@@ -136,7 +136,6 @@ class register(CreateAPIView):
                     LastName=request.data["LastName"],
                     Place=request.data["Place"],
                     Btype=request.data["Btype"],
-                    typee=request.data["typee"],
                     DOB=request.data["DOB"],
                     typee='Donor',
                     email=request.data["email"],
