@@ -6,6 +6,7 @@ urlpatterns = [
 
     #API
     path('register/',register.as_view()),
+    path('register_recipient/',registerRec.as_view()),
     path('user_login/',csrf_exempt(user_login),name='user_login'),
     path('Allusers/',UserListView.as_view()),
     path('Updateuser/<id>/', UserUpdateView.as_view()),
@@ -14,6 +15,6 @@ urlpatterns = [
     #Request
     path('CreateRequest/',RequestCreateView.as_view()),
     path('Requestbyuserid/<int:user_id>/',Requestbyuserid.as_view()),
-    path('UpdateRequest/<id>/', RequestListView.as_view()),
-    path('Allrequest/',UserListView.as_view()),  
+    path('UpdateRequest/<id>/', RequestUpdateView.as_view()),
+    path('Allrequest/',RequestListView.as_view()),  
    ]

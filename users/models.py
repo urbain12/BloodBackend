@@ -92,3 +92,13 @@ class Request(models.Model):
     Status = models.BooleanField(default=False)
     send_at = models.DateField(auto_now_add=True)
 
+
+
+class Donation(models.Model):
+    donor = models.ForeignKey(
+        'User', on_delete=models.CASCADE, null=True, blank=True)
+    request = models.ForeignKey(
+        'Request', on_delete=models.SET_NULL, null=True, blank=True)
+    quantity = models.CharField(max_length=250,blank=True,null=True)
+    send_at = models.DateField(auto_now_add=True)
+

@@ -16,10 +16,15 @@ class ChangePasswordSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','FirstName','LastName','DOB','email','phone']
+        fields = ['id','FirstName','LastName','DOB','typee','Place','email','phone']
 
 
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
+        fields = '__all__'
+
+class DonationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Donation
         fields = '__all__'

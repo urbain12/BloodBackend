@@ -58,6 +58,52 @@ def send_message(first_name,last_name,my_phone):
 
 #User
 
+class registerRec(CreateAPIView):
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
+    def create(self, request):
+        print(request.data)
+        try:
+            user1 = User.objects.get(email=request.data["email"])
+            response = {
+                "status": "Failure",
+                "code": status.HTTP_400_BAD_REQUEST,
+                "message": "A user with that email already exists!",
+                "data": [],
+            }
+
+            return Response(response)
+        except User.DoesNotExist:
+            try:
+                user2 = User.objects.get(phone=request.data["phone"])
+                response = {
+                    "status": "Failure",
+                    "code": status.HTTP_400_BAD_REQUEST,
+                    "message": "A user with that phone number already exists!",
+                    "data": [],
+                }
+
+                return Response(response)
+            except User.DoesNotExist:
+                user = User.objects.create_user(
+                    FirstName=request.data["FirstName"],
+                    LastName='-',
+                    DOB=None,
+                    typee='Recipient',
+                    email=request.data["email"],
+                    phone=request.data["phone"],
+                    password=request.data["password"],
+                )
+                response = {
+                    "status": "success",
+                    "code": status.HTTP_200_OK,
+                    "message": "Kwiyandikisha byagenze neza!!!",
+                    "data": [],
+                }
+
+                return Response(response)
+
+
 class register(CreateAPIView):
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
@@ -89,6 +135,7 @@ class register(CreateAPIView):
                     FirstName=request.data["FirstName"],
                     LastName=request.data["LastName"],
                     DOB=request.data["DOB"],
+                    typee='Donor',
                     email=request.data["email"],
                     phone=request.data["phone"],
                     password=request.data["password"],
@@ -115,6 +162,7 @@ def user_login(request):
                 data = {
                     "user_id": user.id,
                     "email": user.email,
+                    "user_type": user.typee,
                     "status": "success",
                     "token": str(token),
                     "code": status.HTTP_200_OK,
