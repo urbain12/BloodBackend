@@ -239,3 +239,23 @@ class RequestUpdateView(UpdateAPIView):
     serializer_class = RequestSerializer
     lookup_field = "id"
 
+
+class donationbyrecid(ListAPIView):
+    serializer_class = DonationSerializer
+    def get_queryset(self):
+        requests=Request.objects.filter(user=self.kwargs['user_id'])
+        requests_=[]
+        for req in requests:
+            requests_.append(req.id)
+        return Donation.objects.filter(request__in=requests_)
+
+
+class donationbyuserid(ListAPIView):
+    serializer_class = DonationSerializer
+    def get_queryset(self):
+        return Donation.objects.filter(donor=self.kwargs['user_id'])
+
+
+class DonationListView(ListAPIView):
+    queryset = Donation.objects.all()
+    serializer_class = DonationSerializer

@@ -20,4 +20,7 @@ urlpatterns = [
 
     #Donation
     path('CreateDonation/',DonationCreateView.as_view()),
+    path('donationbyrecid/<int:user_id>/',donationbyrecid.as_view()),
+    path('donationbyuserid/<int:user_id>/',donationbyuserid.as_view()),
+    path('Alldonation/',DonationListView.as_view()),
    ]
