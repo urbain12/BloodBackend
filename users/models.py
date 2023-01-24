@@ -91,8 +91,27 @@ class Request(models.Model):
         'User', on_delete=models.CASCADE, null=True, blank=True)
     Btype = models.CharField(max_length=250,blank=True,null=True)
     quantity = models.CharField(max_length=250,blank=True,null=True)
-    Status = models.BooleanField(default=False)
     send_at = models.DateField(auto_now_add=True)
+
+    @property
+    def collectedQty(self):
+        donations = self.donation_set.all()
+        collected_quantity =  sum([int(donation.quantity) for donation in donations])
+        return collected_quantity
+
+    @property
+    def remainingQty(self):
+        donations = self.donation_set.all()
+        collected_quantity =  sum([int(donation.quantity) for donation in donations])
+        remaining_quantity = int(self.quantity)-collected_quantity
+        return remaining_quantity
+
+    @property
+    def Status(self):
+        donations = self.donation_set.all()
+        collected_quantity =  sum([int(donation.quantity) for donation in donations])
+        remaining_quantity = int(self.quantity)-collected_quantity
+        return not remaining_quantity>0
 
 
 

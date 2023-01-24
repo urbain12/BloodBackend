@@ -223,6 +223,11 @@ class RequestCreateView(CreateAPIView):
     serializer_class = RequestSerializer
 
 
+class DonationCreateView(CreateAPIView):
+    queryset = Donation.objects.all()
+    serializer_class = DonationSerializer
+
+
 class RequestListView(ListAPIView):
     queryset = Request.objects.all()
     serializer_class = RequestSerializer

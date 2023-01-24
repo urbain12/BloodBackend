@@ -17,4 +17,7 @@ urlpatterns = [
     path('Requestbyuserid/<int:user_id>/',Requestbyuserid.as_view()),
     path('UpdateRequest/<id>/', RequestUpdateView.as_view()),
     path('Allrequest/',RequestListView.as_view()),  
+
+    #Donation
+    path('CreateDonation/',DonationCreateView.as_view()),
    ]

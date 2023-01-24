@@ -16,13 +16,15 @@ class ChangePasswordSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','FirstName','LastName','DOB','typee','Place','email','phone']
+        fields = ['id','FirstName','LastName','DOB','Btype','typee','Place','email','phone']
 
 
 class RequestSerializer(serializers.ModelSerializer):
+    collectedQty = serializers.ReadOnlyField()
+    remainingQty = serializers.ReadOnlyField()
     class Meta:
         model = Request
-        fields = '__all__'
+        fields = ['id','Btype','quantity','Status','user','send_at','user','collectedQty','remainingQty']
     
     def to_representation(self, instance):
         data = super().to_representation(instance)
