@@ -25,6 +25,8 @@ class UserManager(BaseUserManager):
         user_obj.staff = is_staff
         user_obj.FirstName = FirstName
         user_obj.LastName = LastName
+        user_obj.Btype = Btype
+        user_obj.Place = Place
         user_obj.DOB = DOB
         user_obj.phone = phone
         user_obj.typee = typee
