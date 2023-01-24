@@ -36,3 +36,14 @@ class DonationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation
         fields = '__all__'
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if data['donor'] is not None:
+            data['donor'] = UserSerializer(
+                User.objects.get(pk=data['donor'])).data
+        if data['request'] is not None:
+            data['request'] = RequestSerializer(
+                Request.objects.get(pk=data['request'])).data
+
+        return data
